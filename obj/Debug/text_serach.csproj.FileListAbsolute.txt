@@ -1,0 +1,16 @@
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\text_serach.exe.config
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log0.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log1.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log2.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log3.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log4.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log5.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log6.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log7.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log8.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\log9.txt
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\text_serach.exe
+C:\Users\admin\NG2\C#\search_logs\text_serach\bin\Debug\text_serach.pdb
+C:\Users\admin\NG2\C#\search_logs\text_serach\obj\Debug\text_serach.csprojResolveAssemblyReference.cache
+C:\Users\admin\NG2\C#\search_logs\text_serach\obj\Debug\text_serach.exe
+C:\Users\admin\NG2\C#\search_logs\text_serach\obj\Debug\text_serach.pdb
