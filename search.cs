@@ -19,6 +19,20 @@ namespace text_serach
         {
             this.Get_Inputs();
         }
+
+        public int Deep_Search_and_Cot()
+        {
+            var lines = File.ReadAllLines(Inputs.Path);
+            var q1 = lines.Select(line =>
+            {
+                var words = line.Split(' ').ToList();
+                var total = words.Where(w => w == Inputs.Text).Count();
+                return total;
+            });
+            var sum = 0;
+            q1.ToList().ForEach(i => { sum += i; });
+            return sum;
+        }
         public int Search_and_Count()
         {
             var lines = File.ReadAllLines(Inputs.Path);
@@ -26,7 +40,7 @@ namespace text_serach
             var q = from line in lines
                     where line.Contains(Inputs.Text)
                     select line;
-
+           
             return q.Count();
         }
 
