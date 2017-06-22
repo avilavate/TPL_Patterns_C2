@@ -12,12 +12,16 @@ namespace text_serach
     {
         static void Main(string[] args)
         {
-            const string Search_Text = "The";
+            const string Search_Text = "Sir Arthur Conan Doyle";
             DirectoryInfo dir = new DirectoryInfo("./files");
             IEnumerable<FileInfo> files = dir.EnumerateFiles();
             int hits = 0, hitSeq = 0;
 
             //Sequential Version:
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            // the code that you want to measure comes here
+          
             foreach (var file in files)
             {
                 Search s = new Search(new Input { Path = "./files/" + file.Name, Text = Search_Text });
@@ -25,8 +29,14 @@ namespace text_serach
             }
             Console.WriteLine($"Total counts: \n \t {Search_Text} : {hitSeq}");
 
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine(elapsedMs);
             List<Task<int>> tasks = new List<Task<int>>();
             var obj = new Object();
+
+           
+           
             foreach (var file in files)
             {
                 tasks.Add(Task<int>.Factory.StartNew((arg) =>
@@ -44,6 +54,7 @@ namespace text_serach
 
             var bag = new System.Collections.Concurrent.ConcurrentBag<Task<int>>();
 
+            var watch1 = System.Diagnostics.Stopwatch.StartNew();
             Parallel.ForEach(files, file =>
             {
                 bag.Add(Task<int>.Factory.StartNew((arg) =>
@@ -51,10 +62,7 @@ namespace text_serach
                     var fileItem = (FileInfo)arg;
                     var localHits = 0;
                     Search s = new Search(new Input { Path = "./files/" + file.Name, Text = Search_Text });
-                    lock (obj)
-                    {
-                        localHits = s.Search_and_Count();
-                    }
+                    localHits = s.Search_and_Count();
                     return localHits;
                 }, file));
             });
@@ -76,6 +84,9 @@ namespace text_serach
             }
 
             Console.WriteLine($"Total counts: \n \t {Search_Text} : {hits}");
+            watch1.Stop();
+            var elapsedMs1 = watch1.ElapsedMilliseconds;
+            Console.WriteLine(elapsedMs1);
 
             Task_PassbyValue tp = new Task_PassbyValue();
             tp.Execute();
