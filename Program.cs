@@ -24,7 +24,7 @@ namespace text_serach
                 hitSeq += s.Search_and_Count();
             }
             Console.WriteLine($"Total counts: \n \t {Search_Text} : {hitSeq}");
-            
+
             List<Task<int>> tasks = new List<Task<int>>();
             var obj = new Object();
             foreach (var file in files)
@@ -58,9 +58,8 @@ namespace text_serach
                     return localHits;
                 }, file));
             });
-            
-            var tasks1 = bag.ToList<Task<int>>();
 
+            var tasks1 = bag.ToList<Task<int>>();
             while (tasks1.Count() > 0)
             {
                 try
