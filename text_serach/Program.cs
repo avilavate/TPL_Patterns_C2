@@ -105,6 +105,11 @@ namespace text_serach
                 total += s1.Search_and_Count();
             }
             Console.WriteLine($"Deep Search: {total}");
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+            dict.Add(@"avil's", "Avate");
+            Console.WriteLine(dict[@"avil's"]);
         }
     }
 }
