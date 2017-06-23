@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace text_serach
@@ -12,7 +13,7 @@ namespace text_serach
     {
         static void Main(string[] args)
         {
-            const string Search_Text = "Sir Arthur Conan Doyle";
+            //const string Search_Text = "Sir Arthur Conan Doyle";
             DirectoryInfo dir = new DirectoryInfo("./files");
             IEnumerable<FileInfo> files = dir.EnumerateFiles();
             int hits = 0, hitSeq = 0;
@@ -24,30 +25,30 @@ namespace text_serach
           
             foreach (var file in files)
             {
+                const string Search_Text = "Sir Arthur Conan Doyle";
                 Search s = new Search(new Input { Path = "./files/" + file.Name, Text = Search_Text });
                 hitSeq += s.Search_and_Count();
             }
-            Console.WriteLine($"Total counts: \n \t {Search_Text} : {hitSeq}");
+            Console.WriteLine($"Total counts: \n \t Sir Arthur Conan Doyle : {hitSeq}");
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine(elapsedMs);
+            Console.WriteLine($"Seqential Algo time: {elapsedMs/1000}");
             List<Task<int>> tasks = new List<Task<int>>();
             var obj = new Object();
 
-           
-           
             foreach (var file in files)
             {
                 tasks.Add(Task<int>.Factory.StartNew((arg) =>
                 {
+                    const string Search_Text = "Sir Arthur Conan Doyle";
                     var fileItem = (FileInfo)arg;
                     var localHits = 0;
                     Search s = new Search(new Input { Path = fileItem.Name, Text = Search_Text });
-                    lock (obj)
-                    {
+                    //lock (obj)
+                    //{
                         localHits = s.Search_and_Count();
-                    }
+                    //}
                     return localHits;
                 }, file));
             }
@@ -59,6 +60,7 @@ namespace text_serach
             {
                 bag.Add(Task<int>.Factory.StartNew((arg) =>
                 {
+                    const string Search_Text = "Sir Arthur Conan Doyle";
                     var fileItem = (FileInfo)arg;
                     var localHits = 0;
                     Search s = new Search(new Input { Path = "./files/" + file.Name, Text = Search_Text });
@@ -83,10 +85,10 @@ namespace text_serach
                 }
             }
 
-            Console.WriteLine($"Total counts: \n \t {Search_Text} : {hits}");
+            Console.WriteLine($"Total counts: \n \t Sir Arthur Conan Doyle : {hits}");
             watch1.Stop();
             var elapsedMs1 = watch1.ElapsedMilliseconds;
-            Console.WriteLine(elapsedMs1);
+            Console.WriteLine($"Parallel Algo time: {elapsedMs1/1000d}");
 
             Task_PassbyValue tp = new Task_PassbyValue();
             tp.Execute();
@@ -99,7 +101,7 @@ namespace text_serach
             var total = 0;
             foreach (var file1 in files)
             {
-                Search s1 = new Search(new Input { Path = file1.Name, Text = Search_Text });
+                Search s1 = new Search(new Input { Path = file1.Name, Text = "Sir Arthur Conan Doyle" });
                 total += s1.Search_and_Count();
             }
             Console.WriteLine($"Deep Search: {total}");
